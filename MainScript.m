@@ -2,9 +2,9 @@ clc
 clear all
 close all
 %%
-a=.0004; %wing dimenion width
+a=.0004; %wing dimension width
 b=.0014; % wing dimensions length
-m=0.5*10^-6; %thsi is the mass of a fruit fly in kg
+m=0.5*10^-6; %this is the mass of a fruit fly in kg
 g=9.81;
 
 damage=[0.75:0.02:1]; %damage quantification
