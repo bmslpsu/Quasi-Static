@@ -6,23 +6,23 @@ function [L1,D1, dL, dD] = LiftAndDrag(damage,a,b)
 %is 0.95 then 95 % of the wing is intact and 5% is damaged
 
 %% variables for analysis 
-n = 40;   % number of elements for each wing not used in this version of the code
+n = 40;   % number of elements for each wing 
 T = 1/220; % period of a fruit fly wingbeat
 %alpha = 65*pi/180; %angle in rad
-alpha = 65; % angle in degrees
+alpha = 45; % angle in degrees
 
 %% coefficient of lift and drag (rechecked: this section is correct)
 % from Sane & Dickinson, 2002, JEB
 %C_L = 0.225 + 1.58*sin(2.13*alpha-7.28*pi/180);
 %C_D = 1.92 - 1.55*cos(2.04*alpha-9.82*pi/180);
 
-C_L = 0.225 + 1.58*sin(2.13*alpha - 7.2);
-C_D = 1.92 - 1.55*cos(2.04*alpha - 9.82);
+C_L = 0.225 + 1.58.*sind(2.13.*alpha - 7.2); % angle in degrees
+C_D = 1.92 - 1.55.*cosd(2.04.*alpha - 9.82); % angle in degrees
 
 %% blade element section 
 %output is the force for each element as a function of time dL and dD
 %L and D are forces for a quarter stroke 
 
-[L1, D1, dL, dD] = BladeTestRectangleV3(C_L,C_D,a,damage*b,n,T); 
+[L1, D1, dL, dD] = BladeTestRectangleV3(C_L, C_D, a, damage*b, n, T); 
 
 
