@@ -29,7 +29,7 @@ vel = pi * n * deg2rad(phi) * cos(2*pi*n*t);
 dL = 0.5 * rho * C_L * vel^2 * Cr * r^2;
 dD = 0.5 * rho * C_D * vel^2 * Cr * r^2;
 
-L = int(int(dL,r,0,b),t,0,T/4);
+L = int(int(dL,r,0,b),t,0,T);
 
 L = int(dL,r);
 D = int(dD,r);
