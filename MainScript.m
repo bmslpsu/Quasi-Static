@@ -5,17 +5,24 @@
 clc
 clear all
 close all
-%%
+%% Constants
 a = 0.0004; %wing dimension width (chord c)
 b = 0.0014; % wing dimensions length (length R)
 m = 0.5*10^-6; %this is the mass of a fruit fly in kg
 g = 9.81;
 
+%ne = 40;   % number of elements for each wing 
+n = 220;  % wingbeat frequency
+T = 1/n; % period of a fruit fly wingbeat
+%alpha = 65*pi/180; %angle in rad
+alpha = 45; % angle in degrees
+
+%%
 damage = 0.75:0.02:1; %damage quantification
 
 %% calculation of torque and moment
 [L, D, dL, dD] = LiftAndDrag(1,a,b);
-[L1, D1, dL1, dD1] = LiftAndDrag(.5,a,b); %0.95 here represents percentage of the remaining damaged wing
+[L1, D1, dL1, dD1] = LiftAndDrag(0.5,a,b); %0.95 here represents percentage of the remaining damaged wing
 
 %% Torque caculations
 syms r
@@ -30,10 +37,11 @@ Delta_T_yaw = r_avg_d*D - r_avg_d1*D1; % the torque acting on the fly due to win
 %% Integrate torque for quarter stroke
 syms t
 r = b;
-Delat_T = eval(int(Delta_T_yaw,t,0,1/880))
-Delta_T_Norm = eval(int(Delta_T_yaw/(m*g*b),t,0,1/880))
+Delta_T = eval(int(Delta_T_yaw,t,0,T/4)) % quarter stroke
+Delta_T_Norm = eval(int(Delta_T_yaw/(m*g),t,0,T/4))
 
 %% plots
-plot(moment3_ratio, a2)
-figure
-plot(moment3_ratio, a1)
+%plot(moment3_ratio, a2)
+%figure
+%plot(moment3_ratio, a1)
+
